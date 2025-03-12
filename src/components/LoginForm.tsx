@@ -1,3 +1,5 @@
+"use client";
+
 import { api } from "@/services/api.provider";
 import LocalStorageService from "@/services/localStorageService";
 import {
@@ -11,7 +13,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { signIn } from "next-auth/react";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 import React, { useState } from "react";
 
@@ -19,6 +21,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const toast = useToast();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,9 +43,9 @@ const LoginForm = () => {
       return;
     }
     console.log("result SignIn: ", usuario);
-    const usuarioLogado = await api.post("/login", {
+    const usuarioLogado = await api.post("auth/login", {
       email: email,
-      senha: password,
+      password: password,
     });
     LocalStorageService.addUsuario(usuarioLogado.data);
     router.replace("/");

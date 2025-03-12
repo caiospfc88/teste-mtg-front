@@ -1,6 +1,6 @@
 type usuarioLogado = {
   id: number;
-  nome: string;
+  name: string;
   email: string;
   token: string;
 };
@@ -9,7 +9,7 @@ const LocalStorageService = {
   addUsuario: async (usuario: usuarioLogado) => {
     if (typeof window.localStorage !== "undefined") {
       await window.localStorage?.setItem("id", usuario.id.toString());
-      await window.localStorage?.setItem("nome", usuario.nome);
+      await window.localStorage?.setItem("nome", usuario.name);
       await window.localStorage?.setItem("email", usuario.email);
       await window.localStorage?.setItem("token", usuario.token);
 
