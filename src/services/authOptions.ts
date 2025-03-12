@@ -9,18 +9,18 @@ export const nextAuthOptions: NextAuthOptions = {
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "text" },
-        senha: { label: "Senha", type: "password" },
+        password: { label: "Senha", type: "password" },
       },
-
       async authorize(credentials) {
-        const response = await fetch(base_url + "/login", {
+        console.log("url: ", base_url + "auth/login");
+        const response = await fetch(base_url + "auth/login", {
           method: "POST",
           headers: {
             "Content-type": "application/json",
           },
           body: JSON.stringify({
             email: credentials?.email,
-            senha: credentials?.senha,
+            password: credentials?.password,
           }),
         });
 
@@ -45,7 +45,7 @@ export const nextAuthOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      session = token.user as any;
+      session.user = token.user as any;
       return session;
     },
   },

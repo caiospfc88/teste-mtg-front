@@ -1,29 +1,21 @@
-"use client"
+"use client";
 
-import FormularioLogin from '@/components/FormularioLogin';
-import { Box } from '@chakra-ui/react'
-import React from 'react';
-
-
+import LoginForm from "@/components/LoginForm";
+import { Box } from "@chakra-ui/react";
+import React from "react";
 
 const Login = () => {
-
   return (
     <>
-      <Box 
-      backgroundSize={"cover"}
-      width={"100vw"}
-      height={"100vh"}
-      position={"absolute"}
-      backgroundImage={"/images/background-login2.jpg"}
-      >
-      </Box>      
       <Box
-      position={"relative"}
+        backgroundSize={"cover"}
+        width={"100vw"}
+        height={"100vh"}
+        backgroundColor={"#0086FF"}
       >
-        <FormularioLogin />
+        <LoginForm />
       </Box>
     </>
-  )  
+  );
 };
 export default Login;
