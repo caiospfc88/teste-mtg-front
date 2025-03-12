@@ -37,6 +37,7 @@ import { BiHide, BiShow } from "react-icons/bi";
 const ListaUsuarios = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [usuarios, setUsuarios] = useState<Array<usuarioLogado>>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsloading] = useState<boolean>(true);
   // Estado de paginação
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -107,7 +108,7 @@ const ListaUsuarios = () => {
 
   const handleClickShow = () => setShow(!show);
 
-  let payload = {
+  const payload = {
     name: "",
     email: "",
     senha: "",

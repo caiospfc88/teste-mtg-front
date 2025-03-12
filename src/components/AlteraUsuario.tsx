@@ -6,7 +6,6 @@ import {
   Button,
   FormControl,
   Text,
-  HStack,
   Input,
   Modal,
   ModalBody,
@@ -15,8 +14,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Radio,
-  RadioGroup,
   useDisclosure,
   InputRightElement,
   InputGroup,
@@ -38,6 +35,7 @@ import { GrUserAdmin } from "react-icons/gr";
 type AlteraUsuarioProps = {
   usuarios: Array<usuarioLogado>;
   usuario: usuarioLogado;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   carregaUsuarios: Function;
 };
 
@@ -47,11 +45,7 @@ type UsuarioAlteracao = {
   email: string;
 };
 
-const AlteraUsuario = ({
-  usuarios,
-  usuario,
-  carregaUsuarios,
-}: AlteraUsuarioProps) => {
+const AlteraUsuario = ({ usuario, carregaUsuarios }: AlteraUsuarioProps) => {
   const [change, setChange] = useState<boolean>(true);
   const [senhaChange, setSenhaChange] = useState<boolean>(false);
   const [novoNome, setNovoNome] = useState<string>("");
@@ -66,7 +60,7 @@ const AlteraUsuario = ({
   const handleClickShow = () => setShow(!show);
   const toast = useToast();
 
-  let payload: UsuarioAlteracao = {
+  const payload: UsuarioAlteracao = {
     id: 0,
     name: "",
     email: "",
@@ -112,7 +106,7 @@ const AlteraUsuario = ({
     try {
       await api.put("/alterarUsuario", payload);
       toast({
-        title: `Usuario ${usuario.nome} alterado com sucesso`,
+        title: `Usuario ${usuario.name} alterado com sucesso`,
         duration: 4000,
         status: "success",
       });
@@ -130,12 +124,13 @@ const AlteraUsuario = ({
   };
 
   const alteraSenha = async () => {
-    let alteracao = {
+    const alteracao = {
       id: usuario.id,
       senha: novoSenha,
     };
     try {
       const response = await api.put(`/user/${usuario.id}`, alteracao);
+      console.log(response);
       toast({
         title: `Senha do usuario ${usuario.name} alterada com sucesso`,
         duration: 4000,
