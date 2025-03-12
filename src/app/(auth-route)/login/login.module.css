@@ -1,0 +1,11 @@
+.pageBackground {
+    z-index: -1;
+    position:fixed;
+    width: 100vw;
+    height: 50vw;
+    opacity: 40%;
+  }
+
+  .formulario {
+    text-align: center;
+}
