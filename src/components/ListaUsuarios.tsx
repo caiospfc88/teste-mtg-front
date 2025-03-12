@@ -39,9 +39,8 @@ const ListaUsuarios = () => {
   const [usuarios, setUsuarios] = useState<Array<usuarioLogado>>([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsloading] = useState<boolean>(true);
-  // Estado de paginação
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(4); // Quantidade de itens por página
+  const [itemsPerPage, setItemsPerPage] = useState<number>(4);
   const [change, setChange] = useState<boolean>(true);
   const [usuarioNome, setUsuarioNome] = useState<string>("");
   const [show, setShow] = useState(false);
@@ -49,7 +48,6 @@ const ListaUsuarios = () => {
   const toast = useToast();
   const [usuarioSenha, setUsuarioSenha] = useState<string>("");
 
-  // Cálculo dos itens a serem exibidos na página atual
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = usuarios
@@ -58,7 +56,6 @@ const ListaUsuarios = () => {
 
   const totalPages = usuarios ? Math.ceil(usuarios.length / itemsPerPage) : 1;
 
-  // Funções para navegar entre páginas
   const handleNextPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   };
@@ -253,7 +250,6 @@ const ListaUsuarios = () => {
             display={"flex"}
             mt={"20px"}
           >
-            {/* Paginação */}
             <Box
               w={"100%"}
               display={"flex"}
@@ -374,134 +370,6 @@ const ListaUsuarios = () => {
           </Box>
         </Box>
       </Box>
-      <Modal
-        closeOnOverlayClick={false}
-        isOpen={isOpen}
-        onClose={onClose}
-        size={"xl"}
-      >
-        <FormControl as="fieldset">
-          <ModalOverlay />
-          <ModalContent
-            boxShadow={"2px 8px 25px 10px #002544"}
-            border={"2px #002544 solid"}
-          >
-            <ModalHeader fontWeight={"bold"} color={"#035191"}>
-              Cadastrar usuario.
-            </ModalHeader>
-            <ModalBody pb={6}>
-              <Box>
-                <Box
-                  color={"#035191"}
-                  display={"flex"}
-                  flexDirection={"row"}
-                  fontWeight={"bold"}
-                >
-                  <Text mt={"8px"} mr={"8px"}>
-                    Nome:{" "}
-                  </Text>
-                  <Input
-                    id="nomeUsuario"
-                    placeholder={"Digite o nome..."}
-                    type="text"
-                    w={"400px"}
-                    h={"30px"}
-                    boxShadow={"2px 2px 4px 2px #002544"}
-                    m={"5px"}
-                    onChange={(e) => handleNomeChange(e)}
-                  />
-                </Box>
-
-                <Box
-                  color={"#035191"}
-                  display={"flex"}
-                  flexDirection={"row"}
-                  fontWeight={"bold"}
-                >
-                  <Text mt={"8px"} mr={"8px"}>
-                    E-mail:{" "}
-                  </Text>
-                  <Input
-                    id="emailUsuario"
-                    placeholder={"Digite o e-mail..."}
-                    type="email"
-                    w={"400px"}
-                    h={"30px"}
-                    boxShadow={"2px 2px 4px 2px #002544"}
-                    m={"5px"}
-                    onChange={(e) => handleEmailChange(e)}
-                  />
-                </Box>
-
-                <Box
-                  color={"#035191"}
-                  display={"flex"}
-                  flexDirection={"row"}
-                  fontWeight={"bold"}
-                  mb={"10px"}
-                >
-                  <InputGroup size="md">
-                    <Text mt={"8px"} mr={"8px"}>
-                      Senha:{" "}
-                    </Text>
-                    <Input
-                      type={show ? "text" : "password"}
-                      w={"405px"}
-                      h={"30px"}
-                      boxShadow={"2px 2px 4px 2px #002544"}
-                      m={"5px"}
-                      placeholder="Senha de no minimo 6 caracteres..."
-                      onChange={(e) => handleSenhaChange(e)}
-                      value={usuarioSenha}
-                    />
-                    <InputRightElement width="4.5rem" mr={"40px"}>
-                      <Button h="1.75rem" size="sm" onClick={handleClickShow}>
-                        {show ? <BiHide /> : <BiShow />}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                </Box>
-                {usuarioSenha.length < 6 ? (
-                  <Text
-                    color={"red"}
-                    fontSize={"12px"}
-                    marginLeft={"80px"}
-                    mt={"-10px"}
-                  >
-                    Senha deve conter no mínimo 6 caracteres
-                  </Text>
-                ) : (
-                  ""
-                )}
-              </Box>
-            </ModalBody>
-
-            <ModalFooter>
-              <Button
-                color={"snow"}
-                backgroundColor={"#035191"}
-                _hover={{ backgroundColor: "#002544" }}
-                mr={3}
-                type={"submit"}
-                isDisabled={
-                  !change == true && usuarioSenha.length >= 6 ? false : true
-                }
-                onClick={(e) => handleSaveUsuario(e)}
-              >
-                Save
-              </Button>
-              <Button
-                onClick={handleCancel}
-                backgroundColor={"red"}
-                _hover={{ backgroundColor: "darkred" }}
-                color={"snow"}
-              >
-                Cancel
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </FormControl>
-      </Modal>
       <Modal
         closeOnOverlayClick={false}
         isOpen={isOpen}
