@@ -1,4 +1,4 @@
-type usuarioLogado = {
+export type usuarioLogado = {
   id: number;
   name: string;
   email: string;
